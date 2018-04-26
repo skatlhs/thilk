@@ -1,0 +1,1 @@
+export const fakeAvatar = 'https://i.imgur.com/EnhZp95.jpg';

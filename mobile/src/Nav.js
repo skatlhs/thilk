@@ -16,7 +16,7 @@ export default class Nav {
         {
           label: 'Feeds',
           screen: 'thilk.FeedsScreen',
-          title: 'Instagram',
+          title: 'My Thilk Feeds',
           icon: iconsMap.home
         },
         {

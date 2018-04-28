@@ -19,10 +19,19 @@ export default class Nav {
           title: 'My Thilk Feeds',
           icon: iconsMap.home
         },
+          
         {
           label: 'Explore',
           screen: 'thilk.ExploreScreen',
           title: 'Explore',
+          icon: iconsMap.globe 
+        },
+          
+          
+        {
+          label: 'Search',
+          screen: 'thilk.ExploreScreen',
+          title: 'Search',
           icon: iconsMap['ios-search']
         },
       ],

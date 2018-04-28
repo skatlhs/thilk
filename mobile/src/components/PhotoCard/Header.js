@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-//import Touchable from '@appandflow/touchable';
-//import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text, StyleSheet, Image, Button, BorderlessButton } from 'react-native';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { human, systemWeights} from 'react-native-typography'
 
 import { makeCircle } from '../../utils/themes';
 import { fakeAvatar } from '../../utils/constants';
+
 
 
 const styles = StyleSheet.create({
@@ -21,8 +23,10 @@ const styles = StyleSheet.create({
     },
     
     btnWrapper: {
-        flex: 0.2,
-        backgroundColor: 'yellow'
+        flex: 0.1,
+        backgroundColor: 'yellow',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     
     avatarWrapper: {
@@ -42,31 +46,40 @@ const styles = StyleSheet.create({
     },
     
     username: {
-        color: '#000000'
+        ...human.subheadObject
     },
     
     location: {
-        color: '#000000'
+       ...human.footnoteObject,
+       ...systemWeights.light
+    },
+    
+    btnPosition: {
+        justifyContent: 'center',
+        paddingTop:15
     }
     
 })
 
-export default function Header() {
+export default function Header({
+    avatar = fakeAvatar,
+    username = 'testUser',
+    location = 'Ottawa, ON'
+}) {
     return (
         <View style={styles.root}>
             <View style={styles.userMetaWrapper}>
                 <View style={styles.avatarWrapper}>
-                 <Image source={{ uri: fakeAvatar }} style={styles.avatarImg} />
+                 <Image source={{ uri: avatar }} style={styles.avatarImg} />
             </View>
             <View style={styles.userInfoWrapper}>
-                <Text style={styles.username}>Abner Q.</Text>
-                <Text style={styles.location}>Ottawa, Canada</Text>
-            </View>
-        </View>  
+                <Text style={styles.username}> {username} </Text>
+                <Text style={styles.location}> {location} </Text>
+            </View> 
+        </View>
         
-           //<Touchable feedback="opacity" style={styles.btnWrapper}>
-             //   <MaterialCommunityIcons name="dots-horizontal" size={25} />
-           //</Touchable>
+       
+
         </View>
     ) 
 }

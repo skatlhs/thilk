@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@appandflow/touchable@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@appandflow/touchable/-/touchable-2.0.0.tgz#6a37f4a85747475ff88d1ed15c49912001c1ab6b"
+
 "@babel/code-frame@7.0.0-beta.46", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0-beta.46"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.46.tgz#e0d002100805daab1461c0fcb32a07e304f3a4f4"
@@ -2404,6 +2408,10 @@ hoek@4.x.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
 
+hoist-non-react-statics@^2.3.1:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -4142,11 +4150,23 @@ react-is@^16.3.1:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.2.tgz#f4d3d0e2f5fbb6ac46450641eb2e25bf05d36b22"
 
+react-native-gesture-handler@^1.0.0-alpha.43:
+  version "1.0.0-alpha.43"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.0-alpha.43.tgz#4a5c324b6a70cf44d31934a631ce6029c8a460e2"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    invariant "^2.2.2"
+    prop-types "^15.5.10"
+
 "react-native-navigation@https://github.com/EQuimper/react-native-navigation":
   version "1.1.314"
   resolved "https://github.com/EQuimper/react-native-navigation#fbb1a7e6ea5881ed0d6aa5760185b2533a5758bd"
   dependencies:
     lodash "4.x.x"
+
+react-native-typography@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-typography/-/react-native-typography-1.3.0.tgz#ae921c141ab1dfdf4335ebc2b4a146bcf7919b36"
 
 react-native-vector-icons@^4.6.0:
   version "4.6.0"

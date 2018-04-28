@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'; 
-import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
+import { makeHitSlop } from '../../utils/themes';
 
 const styles = StyleSheet.create({
     root: {
@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
     
     actionWrapper: {
         flex: 2,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
     },
     
     actionButton: {
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     },
     
     fakeView: {
-        flex: 2,
+        flex: 3,
     },
     
     bookmarkWrapper: {
@@ -39,21 +41,22 @@ const styles = StyleSheet.create({
 
 class ActionButtons extends Component {
   state = {};
+
   render() {
     return (
       <View style={styles.root}>
         
         <View style={styles.actionWrapper}>
-            <TouchableOpacity style={styles.actionButton}>
-                <FontAwesome name="heart-o" size={30} />
+            <TouchableOpacity  style={styles.actionButton}>
+                <Ionicons name="ios-shirt-outline" size={35} />
             </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionButton}>
-                <FontAwesome name="comment-o" size={30} />
+        <TouchableOpacity  style={styles.actionButton}>
+                <Ionicons name="ios-chatbubbles-outline" size={30} />
             </TouchableOpacity>        
         
         <TouchableOpacity style={styles.actionButton}>
-                <FontAwesome name="send-o" size={30} />
+               <Ionicons name="ios-send-outline" size={40}  />
             </TouchableOpacity>
         
         </View>
@@ -61,7 +64,7 @@ class ActionButtons extends Component {
         <View style={styles.fakeView} />
         
        <TouchableOpacity style={styles.bookmarkWrapper}>
-                <FontAwesome name="bookmark-o" size={30}  />
+                <Ionicons name="ios-bookmark-outline" size={35}  />
             </TouchableOpacity>
         
       </View>

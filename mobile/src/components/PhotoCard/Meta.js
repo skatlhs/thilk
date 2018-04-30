@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 })
 
 export default function Meta({
-    caption = 'YSL in NYC',
+    caption = 'No caption added',
     username = "Abner Q."
 }) {
     
@@ -39,7 +39,7 @@ export default function Meta({
                     <Text style={styles.nameColor}> 523 others</Text> dig this fit!</Text>
            </View>
             <View style={styles.wrapper}>
-               <Text style={styles.text}>
+               <Text numberOfLines={4} style={styles.text}>
                 <Text style={styles.nameColor}>{username}: </Text> {caption} </Text>
             </View>
         </View>

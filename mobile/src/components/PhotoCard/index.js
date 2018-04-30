@@ -45,9 +45,9 @@ class PhotoCard extends Component {
         return (
             <View style={styles.root}>
               <Header />
-                <Image style={styles.img} source={{ uri: "https://images.unsplash.com/photo-1507736068714-562a1aba9110?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d2765df2f4f1c2cb19b23914f45c59a5&auto=format&fit=crop&w=400&q=60"}} />
+                <Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
             <ActionButtons />
-            <Meta />
+            <Meta caption={this.props.data.caption}/>
               <View style={styles.commentsWrapper}>
                 <TouchableOpacity>
                     <Text style={styles.commentViewAll}>View all 15 comments</Text>

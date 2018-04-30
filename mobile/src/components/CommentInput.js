@@ -29,13 +29,18 @@ const styles = StyleSheet.create ({
     
     inputText: {
         color: "#aaaaaa",
+        color: 'white',
+        fontWeight: 'bold'
 
     },
     
     input: {
         borderWidth: 1,
         borderColor: "#aaaaaa",
+        borderColor: "#222",
+        backgroundColor: "#222",
         alignItems: 'flex-start',
+        alignItems: 'center',
         paddingVertical: 5,
         paddingHorizontal: 10,
         width: '95%',
@@ -54,7 +59,7 @@ class CommentInput extends Component {
                 
                 <TouchableOpacity style={styles.inputWrapper}>
                     <View style={styles.input}>
-                        <Text style={styles.inputText}>Add a comment...</Text>
+                        <Text style={styles.inputText}>Add a comment</Text>
                     </View>
                 </TouchableOpacity>
             

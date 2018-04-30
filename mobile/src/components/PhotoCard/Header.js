@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, BorderlessButton } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { human, systemWeights} from 'react-native-typography'
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
 export default function Header({
     avatar = fakeAvatar,
-    username = 'testUser',
+    username = 'Abner Q.',
     location = 'Ottawa, ON'
 }) {
     return (

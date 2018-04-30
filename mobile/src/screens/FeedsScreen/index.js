@@ -9,6 +9,11 @@ class FeedsScreen extends Component {
     return (
       <ScrollView>
         <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
+        <PhotoCard />
       </ScrollView>
     );
   }

@@ -9,15 +9,14 @@ const styles = StyleSheet.create({
     root: {
         height: 50,
         paddingHorizontal: 16,
-        top: 10,
-        flexDirection: 'row'
+        top: 0,
+        bottom: 102,
+        flexDirection: 'row',
     },
     
     actionWrapper: {
-        flex: 2,
+        flex: 1.7,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center'
     },
     
     actionButton: {
@@ -48,15 +47,15 @@ class ActionButtons extends Component {
         
         <View style={styles.actionWrapper}>
             <TouchableOpacity  style={styles.actionButton}>
-                <Ionicons name="ios-shirt-outline" size={35} />
+                <Ionicons name="ios-shirt-outline" size={40} />
             </TouchableOpacity>
 
         <TouchableOpacity  style={styles.actionButton}>
-                <Ionicons name="ios-chatbubbles-outline" size={30} />
+                <Ionicons name="ios-chatbubbles-outline" size={35} />
             </TouchableOpacity>        
         
         <TouchableOpacity style={styles.actionButton}>
-               <Ionicons name="ios-send-outline" size={40}  />
+               <Ionicons name="ios-send-outline" size={45}  />
             </TouchableOpacity>
         
         </View>
@@ -64,7 +63,7 @@ class ActionButtons extends Component {
         <View style={styles.fakeView} />
         
        <TouchableOpacity style={styles.bookmarkWrapper}>
-                <Ionicons name="ios-bookmark-outline" size={35}  />
+                <Ionicons name="ios-bookmark-outline" size={40}  />
             </TouchableOpacity>
         
       </View>

@@ -2,7 +2,6 @@ defmodule Thlk.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :avatar, :string
     field :email, :string
@@ -19,7 +18,7 @@ defmodule Thlk.Accounts.User do
     user
     |> cast(attrs, [:username, :avatar, :facebook_id, :email, :first_name, :last_name])
     |> validate_required([:avatar, :facebook_id, :email, :first_name, :last_name])
-    |> unique_constraint(:email)
     |> unique_constraint(:facebook_id)
+    |> unique_constraint(:email)
   end
 end

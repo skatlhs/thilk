@@ -3,6 +3,7 @@ defmodule ThlkWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ThlkWeb.Context
   end
 
   scope "/api" do
@@ -10,9 +11,7 @@ defmodule ThlkWeb.Router do
       
     forward "/graphql", Absinthe.Plug,
       schema: ThlkWeb.Schema
-      
-      
-      
+          
     if Mix.env == :dev do
         forward "/graphiql", Absinthe.Plug.GraphiQL,
             schema: ThlkWeb.Schema  

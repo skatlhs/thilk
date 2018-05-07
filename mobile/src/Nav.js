@@ -1,40 +1,41 @@
 import { Navigation } from 'react-native-navigation';
 
 import { registerScreens } from './screens';
-import { iconsLoaded, iconsMap } from './utils/themes';
+import { iconsMap } from './utils/themes';
+import appInitialized from './utils/appInitialized';
 
 registerScreens();
 
-export default class Nav {
-  constructor() {
-    iconsLoaded.then(() => this._initApp());
-  }
+export function startLogin() {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'thilk.LoginScreen',
+      navigatorStyle: {
+        navBarHidden: true,
+      },
+    },
+  });
+}
 
-  _initApp() {
-    Navigation.startTabBasedApp({
-      tabs: [
-        {
-          label: 'Feeds',
-          screen: 'thilk.FeedsScreen',
-          title: 'My Thilk Feeds',
-          icon: iconsMap.home
-        },
-          
-        {
-          label: 'Explore',
-          screen: 'thilk.ExploreScreen',
-          title: 'Explore',
-          icon: iconsMap.globe 
-        },
-          
-          
-        {
-          label: 'Search',
-          screen: 'thilk.ExploreScreen',
-          title: 'Search',
-          icon: iconsMap['ios-search']
-        },
-      ],
-    });
-  }
+export function startMainApp() {
+  Navigation.startTabBasedApp({
+    tabs: [
+      {
+        label: 'Feeds',
+        screen: 'thilk.FeedsScreen',
+        title: 'Instagram',
+        icon: iconsMap.home,
+      },
+      {
+        label: 'Explore',
+        screen: 'thilk.ExploreScreen',
+        title: 'Explore',
+        icon: iconsMap['ios-search'],
+      },
+    ],
+  });
+}
+
+export function init() {
+  appInitialized();
 }

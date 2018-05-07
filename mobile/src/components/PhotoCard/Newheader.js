@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     
     input: {
         backgroundColor: "#009b95",
-        backgroundColor: "#222",
         alignItems: 'flex-start',
         alignItems: 'center',
         paddingVertical: 5,
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
 
 export default function Header({
     avatar = fakeAvatar,
-    username = 'TestUser A.',
+    username = 'Abner Q.',
     location = 'Ottawa, ON'
 }) {
     return (
@@ -106,7 +105,7 @@ export default function Header({
                 
                 <TouchableOpacity style={styles.inputWrapper}>
                     <View style={styles.input}>
-                    <Text style={styles.inputText}>Follow {username}</Text>
+                        <Text style={styles.inputText}>Follow {username}</Text>
                     </View>
                 </TouchableOpacity>
             </View> 

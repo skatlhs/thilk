@@ -23,7 +23,7 @@ export function startMainApp() {
       {
         label: 'Feeds',
         screen: 'thilk.FeedsScreen',
-        title: 'Instagram',
+        title: 'Thilk Feeds',
         icon: iconsMap.home,
       },
       {

@@ -6,7 +6,9 @@ import { human, systemWeights} from 'react-native-typography'
 
 import { makeCircle } from '../../utils/themes';
 import { fakeAvatar } from '../../utils/constants';
+import LinearGradient from 'react-native-linear-gradient';
 
+const COLORS_GRADIENTS = ['#ff3d78', '#ff7537']
 
 
 const styles = StyleSheet.create({
@@ -78,13 +80,17 @@ const styles = StyleSheet.create({
     
     input: {
         backgroundColor: "#009b95",
-        backgroundColor: "#222",
+        backgroundColor: "transparent",
         alignItems: 'flex-start',
         alignItems: 'center',
-        paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingVertical: 8,
+        paddingHorizontal: 20,
         width: '95%',
-        borderRadius: 4,
+        borderRadius: 40,
+    },
+   
+    lgg: {
+        borderRadius: 5
     }
     
 })
@@ -103,11 +109,14 @@ export default function Header({
             <View style={styles.userInfoWrapper}>
                 <Text style={styles.username}> {username} </Text>
                 <Text style={styles.location}> {location} </Text>
-                
+               
+        
                 <TouchableOpacity style={styles.inputWrapper}>
+                 <LinearGradient colors={COLORS_GRADIENTS} style={styles.lgg}>
                     <View style={styles.input}>
                     <Text style={styles.inputText}>Follow {username}</Text>
                     </View>
+        </LinearGradient>
                 </TouchableOpacity>
             </View> 
      //   </View>

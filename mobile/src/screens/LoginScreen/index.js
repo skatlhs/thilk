@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, StatusBar, TextInput, TouchableOpacity } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+const COLORS_GRADIENTS = ['#ff3d78', '#ff7537'];
 
 const styles = StyleSheet.create({
     root: {
@@ -7,15 +11,205 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    
+    header: {
+        flex: 0.3,
+        flexDirection: 'row',
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    
+    content: {
+        flex: 1,
+        alignSelf: 'stretch'
+    },
+    
+    bgImage: {
+        flex: 1,
+    },
+    
+    imageFont: {
+        color: 'white'
+    },
+    
+    section: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch'
+    },
+    
+    sectionStart: {
+        justifyContent: 'flex-start'
+    },
+    
+    inputWrapper: {
+        height: 45,
+        width: '90%',
+        backgroundColor: '#ffffff',
+        borderRadius: 5,
+        borderColor: '#e5e5e5',
+        borderWidth: 1,
+        marginBottom: 10,
+        padding:10
+    },
+    
+    input: {
+        flex: 1,
+        padding: 0
+    },
+    
+    loginButton: {
+        width: '95%',
+        paddingVertical: 15,
+                borderRadius: 5
+    },
+    
+    myWidth: {
+        width: '95%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+    centerText: {
+        color: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 16
+    },
+    
+    forgot: {
+        marginVertical: 10,
+        flexDirection: 'row'
+    },
+    
+    forgotLink: {
+        color: '#ff3d78',
+        color: '#ff7537',
+    },
+    
+    orWrapper: {
+        width: '90%',
+        marginVertical: 10,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        alignItems: 'center',
+    },
+   
+    orDivider: {
+        height: 1,
+        width: '100%',
+        flex: 1,
+        backgroundColor: '#a7a7a740',
+    },
+    
+    orTextWrapper: {
+        flex: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    
+    orText: {
+        color: '#a7a7a7'
+    },
+    
+    loginFb: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 45
+    },
+    
+    fbText: {
+        color: "#318DEE",
+        marginLeft: 10
+    },
+    
+    noAccount: {
+        height: 50,
+        width: '100%',
+        borderColor: '#a7a7a740',
+        borderTopWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+    
 })
 
 class LoginScreen extends Component {
     state = { }
     render() {
         return(
-            <View style={styles.root}>
-                <Text>Login Screen</Text>
+           <View style={styles.root}>
+            <StatusBar barStyle="light-content" />
+            <LinearGradient 
+                start={{ x: 0.0, y: 0.0 }} 
+                end={{ x: 1.0, y: 1.0 }}
+                colors={COLORS_GRADIENTS} 
+                style={styles.header}>
+                
+            <Image source={require('../../../images/thilk-jet-pilot.png')} / > 
+            </LinearGradient>
+
+            <View style={styles.content}>
+                <View style={styles.section}>
+                    <View style={styles.inputWrapper}>
+                        <TextInput style={styles.input} underlineColorAndroid='transparent' placeholder="email" />
+                    </View>
+
+                    <View style={styles.inputWrapper}>
+                        <TextInput style={styles.input} underlineColorAndroid='transparent' placeholder="password" />                        
+                    </View>
+                    
+                    <TouchableOpacity style={styles.myWidth}>
+                        <LinearGradient 
+                            start={{ x: 0.0, y: 0.0 }} 
+                            end={{ x: 1.0, y: 1.0 }}
+                            colors={COLORS_GRADIENTS} 
+                            style={styles.loginButton}>           
+                                <Text style={styles.centerText}>Log In</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    
+                    <View style={styles.forgot}>
+                        <Text style={{ color: '#a7a7a7' }}>Forgot your log in?</Text>
+                            <TouchableOpacity>
+                                <Text style={styles.forgotLink}> Get help signing in</Text>
+                            </TouchableOpacity>
+                            <Text style={{ color: '#a7a7a7' }}>.</Text>
+                    </View>
+                </View>
+
+                <View style={styles.orWrapper}>
+                    <View style={styles.orDivider} />
+                    <View style={styles.orTextWrapper}>
+                        <Text style={styles.orText}>OR</Text>
+                    </View>
+                    <View style={styles.orDivider} />
+                </View>
+
+          <View style={[styles.section, styles.sectionStart]}>
+                   <TouchableOpacity style={styles.loginFb}> 
+                     <FontAwesome size={30} name="facebook-square" color="#318DEE"/>
+                         <Text style={styles.fbText}>Log in with facebook</Text>
+                    </TouchableOpacity> 
+                </View>
+                
+                <View style={styles.noAccount}>
+                    <Text style={{ color: '#a7a7a7' }}>Don't have an account?'</Text>
+                        <TouchableOpacity>
+                            <Text style={styles.forgotLink}> Sign up for free</Text>
+                        </TouchableOpacity>
+                        <Text style={{ color: '#a7a7a7' }}>.</Text>
+                </View>
+                
             </View>
+            </View>
+
         );
     }
 }

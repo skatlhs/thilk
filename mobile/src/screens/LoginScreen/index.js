@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, StatusBar, TextInput, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { LoginManager } from 'react-native-fbsdk';
 const COLORS_GRADIENTS = ['#ff3d78', '#ff7537'];
 
 const styles = StyleSheet.create({
@@ -142,6 +142,10 @@ const styles = StyleSheet.create({
 
 class LoginScreen extends Component {
     state = { }
+
+  _onLoginFbPress = async () => {
+    const res = await LoginManager.logInWithReadPermissions(['public_profile']);
+  };
     render() {
         return(
            <View style={styles.root}>
@@ -193,7 +197,7 @@ class LoginScreen extends Component {
                 </View>
 
           <View style={[styles.section, styles.sectionStart]}>
-                   <TouchableOpacity style={styles.loginFb}> 
+                   <TouchableOpacity onPress={this._onLoginFbPress} style={styles.loginFb}> 
                      <FontAwesome size={30} name="facebook-square" color="#318DEE"/>
                          <Text style={styles.fbText}>Log in with facebook</Text>
                     </TouchableOpacity> 

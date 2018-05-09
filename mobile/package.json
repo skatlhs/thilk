@@ -16,6 +16,7 @@
     "react": "16.3.1",
     "react-apollo": "^2.1.3",
     "react-native": "0.55.3",
+    "react-native-fbsdk": "^0.7.0",
     "react-native-gesture-handler": "^1.0.0-alpha.43",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "https://github.com/EQuimper/react-native-navigation",

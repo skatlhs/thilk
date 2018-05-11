@@ -91,6 +91,16 @@ const styles = StyleSheet.create({
    
     lgg: {
         borderRadius: 5
+    },
+    
+    userData: {
+        flexDirection: 'row',  display: 'none'
+    },
+    
+    userDataStats: {
+        color: '#8b8b8b',
+        fontSize: 10,
+        fontWeight: 'bold'
     }
     
 })
@@ -98,7 +108,9 @@ const styles = StyleSheet.create({
 export default function Header({
     avatar = fakeAvatar,
     username = 'TestUser A.',
-    location = 'Ottawa, ON'
+    location = 'Ottawa, ON',
+    posts = '14 Posts',
+    followers = '4.6k Followers'
 }) {
     return (
         <View style={styles.root}>
@@ -108,11 +120,15 @@ export default function Header({
             </View>
             <View style={styles.userInfoWrapper}>
                 <Text style={styles.username}> {username} </Text>
-                <Text style={styles.location}> {location} </Text>
-               
+                <Text style={styles.location}> {location} </Text>            
+                
         
+               <View style={styles.userData}>
+                    <Text style={styles.userDataStats}> {posts} </Text>
+                    <Text style={styles.userDataStats}> {followers} </Text>
+                </View>
                 <TouchableOpacity style={styles.inputWrapper}>
-                 <LinearGradient colors={COLORS_GRADIENTS} style={styles.lgg}>
+                 <LinearGradient start={{ x: 0.0, y: 0.0 }} end={{ x: 1.0, y: 1.0 }} colors={COLORS_GRADIENTS} style={styles.lgg}>
                     <View style={styles.input}>
                     <Text style={styles.inputText}>Follow {username}</Text>
                     </View>

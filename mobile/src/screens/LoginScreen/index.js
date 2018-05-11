@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, StatusBar, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, StatusBar, TextInput, TouchableOpacity, AsyncStorage, ActivityIndicator } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { LoginManager } from 'react-native-fbsdk';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo'
+import { authToken } from '../../utils/constants'
+import { startMainApp } from '../../Nav';
 const COLORS_GRADIENTS = ['#ff3d78', '#ff7537'];
 
 const styles = StyleSheet.create({
@@ -141,12 +145,47 @@ const styles = StyleSheet.create({
 })
 
 class LoginScreen extends Component {
-    state = { }
+    state = { loading: false }
 
   _onLoginFbPress = async () => {
-    const res = await LoginManager.logInWithReadPermissions(['public_profile']);
-  };
+    this.setState({ loading: true })
+    const res = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+      
+    if (res.grantedPermissions && !res.isCancelled) {
+      const data = await AccessToken.getCurrentAccessToken();
+        
+        
+        if (data) {
+           const serverResponse = await this.props.loginMutation({
+               variables: {
+                   provider: 'FACEBOOK',
+                   token: data.accessToken,
+               },
+           });
+        
+        
+      const { token } = serverResponse.data.login;
+            
+        try {
+          await AsyncStorage.setItem(authToken, token);
+          state = { loading: false }
+          startMainApp();
+        } catch (error) {
+            throw error;
+        }
+            
+      }
+    }
+    };
+
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={styles.root}>
+                    <ActivityIndicator size="large" />
+                </View>
+            );
+        }
         return(
            <View style={styles.root}>
             <StatusBar barStyle="light-content" />
@@ -218,4 +257,12 @@ class LoginScreen extends Component {
     }
 }
 
-export default LoginScreen
+const loginMutation = gql`
+  mutation($provider: Provider, $token: String) {
+    login(provider: $provider, token: $token) {
+      token
+    }
+  }
+`;
+
+export default graphql(loginMutation, { name: 'loginMutation' })(LoginScreen);

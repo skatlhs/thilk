@@ -1,6 +1,7 @@
 defmodule Thlk.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Thlk.Accounts.User
 
   schema "users" do
     field :avatar, :string
@@ -10,15 +11,17 @@ defmodule Thlk.Accounts.User do
     field :last_name, :string
     field :username, :string
 
+    has_many :like_photos, Thlk.Reactions.LikePhoto
+
     timestamps()
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :avatar, :facebook_id, :email, :first_name, :last_name])
     |> validate_required([:avatar, :facebook_id, :email, :first_name, :last_name])
-    |> unique_constraint(:facebook_id)
     |> unique_constraint(:email)
+    |> unique_constraint(:facebook_id)
   end
 end

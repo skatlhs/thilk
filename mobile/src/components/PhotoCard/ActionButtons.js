@@ -46,7 +46,7 @@ class ActionButtons extends Component {
       <View style={styles.root}>
         
         <View style={styles.actionWrapper}>
-            <TouchableOpacity  style={styles.actionButton}>
+            <TouchableOpacity onPress={this.props.onLikedPress} style={styles.actionButton}>
                 <Ionicons name="ios-shirt-outline" size={40} />
             </TouchableOpacity>
 

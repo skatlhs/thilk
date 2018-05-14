@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, StyleSheet, View, RefreshControl } from 'react-native';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-
 import { PhotoCard } from '../../components';
+import { FeedsPhotoFragment } from './fragments';
 
 const styles = StyleSheet.create ({
     loadingWrapper: {
@@ -41,7 +41,7 @@ class FeedsScreen extends Component {
             </View>
           )
       }
-      
+    
     return (
       <FlatList
         data={this.props.data.photos}
@@ -61,12 +61,10 @@ class FeedsScreen extends Component {
 const getPhotos = gql`
   query {
     photos {
-      id
-      imageUrl
-      caption
-      viewerLike
+    ...feedsPhoto
     }
   }
+  ${FeedsPhotoFragment}
 `;
 
 export default graphql(getPhotos)(FeedsScreen);

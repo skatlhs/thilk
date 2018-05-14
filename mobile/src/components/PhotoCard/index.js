@@ -45,7 +45,7 @@ class PhotoCard extends Component {
 
   _onLikedPress = async () => {
     console.log('====================================');
-    console.log('you like me');
+    console.log('you like me', this.props);
     console.log('====================================');
 
     try {
@@ -68,7 +68,7 @@ class PhotoCard extends Component {
             <View style={styles.root}>
               <Header />
                 <Image style={styles.img} source={{ uri: this.props.data.imageUrl }} />
-            <ActionButtons onLikedPress={this._onLikedPress} />
+            <ActionButtons viewerLike={this.props.data.viewerLike} onLikedPress={this._onLikedPress} />
             <Meta caption={this.props.data.caption}/>
               <View style={styles.commentsWrapper}>
                 <TouchableOpacity>

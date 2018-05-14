@@ -40,14 +40,19 @@ const styles = StyleSheet.create({
 
 class ActionButtons extends Component {
   state = {};
-
+  _getLikeIcon = () => {
+      if (this.props.viewerLike) {
+          return  <Ionicons name="ios-shirt" size={40} color="#1d1d1d" />
+      }
+      
+      return  <Ionicons name="ios-shirt-outline" size={40} />
+  }
   render() {
     return (
       <View style={styles.root}>
-        
         <View style={styles.actionWrapper}>
             <TouchableOpacity onPress={this.props.onLikedPress} style={styles.actionButton}>
-                <Ionicons name="ios-shirt-outline" size={40} />
+                {this._getLikeIcon()}
             </TouchableOpacity>
 
         <TouchableOpacity  style={styles.actionButton}>

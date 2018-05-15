@@ -28,6 +28,15 @@ config :thlk, ThlkWeb.Auth.Guardian,
     verify_issuer: true,
     secret_key: "MSZa1SUBzxLhtHBaVK7h+tAt6cN6hl0uzjQVNcTzNC15PAwDzuAVVqbO3wfhCD2U"
 
+# AWS
+config :ex_aws,
+  access_key_id: "AKIAIMBFI6LV72RRLOPQ",
+  secret_access_key: "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",
+  s3: [
+    scheme: "https://",
+    host: "thilk.s3.amazonaws.com",
+    region: "us-east-2"
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

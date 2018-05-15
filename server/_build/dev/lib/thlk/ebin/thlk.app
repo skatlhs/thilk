@@ -1,6 +1,7 @@
 {application,thlk,
              [{applications,[kernel,stdlib,elixir,logger,runtime_tools,faker,
-                             gettext,absinthe,facebook,phoenix_pubsub,cowboy,
+                             gettext,absinthe,hackney,sweet_xml,ex_aws,
+                             ex_aws_s3,facebook,phoenix_pubsub,cowboy,uuid,
                              absinthe_plug,phoenix,guardian,postgrex,
                              absinthe_ecto,phoenix_ecto]},
               {description,"thlk"},

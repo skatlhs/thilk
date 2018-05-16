@@ -48,6 +48,6 @@ defmodule Thlk.Posts do
   end
 
   defp get_image_url(bucket, uuid) do
-    "https://s3.amazonaws.com/thilk/#{bucket}/#{uuid}.jpg"
+    "https://s3.us-east-2.amazonaws.com/thilk/#{bucket}/#{uuid}.jpg"
   end
 end

@@ -30,8 +30,8 @@ config :thlk, ThlkWeb.Auth.Guardian,
 
 # AWS
 config :ex_aws,
-  access_key_id: "AKIAIMBFI6LV72RRLOPQ",
-  secret_access_key: "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",
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
   s3: [
     scheme: "https://",
     host: "thilk.s3.amazonaws.com",

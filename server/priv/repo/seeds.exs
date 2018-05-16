@@ -1,6 +1,8 @@
-alias Thlk.{Posts, Repo}
+import Integer, only: [is_odd: 1]
+alias Thlk.{Posts, Repo, Accounts}
 
 mock_photos = 9
+mock_users = 5
 
 photos_list = [
   "https://images.unsplash.com/photo-1504633273314-6a929fcd7090?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=73aeff1876133560dbd3555e9c3d0ad1&auto=format&fit=crop&w=500&q=60",
@@ -25,10 +27,25 @@ photos_list = [
 
 ]
 
+# Users
+for idx <- 1..mock_users do
+  sex = if (is_odd(idx)), do: "women", else: "men"
+  avatar = "https://randomuser.me/api/portraits/#{sex}/#{idx}.jpg"
+  %Accounts.User{
+    email: Faker.Internet.email,
+    avatar: avatar,
+    username: Faker.Internet.user_name,
+    facebook_id: "#{idx}"
+  }
+  |> Repo.insert!
+end
+
+# Photos
 for idx <- 0..mock_photos do
   photo = %{
     image_url: Enum.at(photos_list, idx),
-    caption: Faker.Lorem.Shakespeare.hamlet
+    caption: Faker.Lorem.Shakespeare.hamlet,
+    user_id: Enum.random(1..mock_users)
   }
 
   %Posts.Photo{}

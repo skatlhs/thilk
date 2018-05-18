@@ -4,6 +4,8 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { PhotoCard } from '../../components';
 import { FeedsPhotoFragment } from './fragments';
+import { iconsMap } from '../../utils/themes';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = StyleSheet.create ({
     loadingWrapper: {
@@ -14,10 +16,36 @@ const styles = StyleSheet.create ({
 })
 
 class FeedsScreen extends Component {
-  state = {
-      isRefreshing: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isRefreshing: false,
+    };
+    props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
   }
 
+  componentWillMount() {
+      this.props.navigator.setButtons({
+          rightButtons: [
+              {
+                id: 'camera',
+                 icon: iconsMap.camera
+              },
+          ]
+      })
+  }
+
+  _onNavigatorEvent(e) {
+    if (e.type === 'NavBarButtonPress') {
+      if (e.id === 'camera') {
+        this.props.navigator.showModal({
+          screen: 'thilk.CreatePhotoScreen',
+          title: 'Upload a Photo',
+          animationType: 'slide-up',
+        });
+      }
+    }
+  }
 
   _keyExtractor = item => item.id;
 
@@ -30,10 +58,6 @@ class FeedsScreen extends Component {
   }
   
   render() {
-      console.log('================================');
-      console.log('this is the props', this.props);
-      console.log('================================');
-      
       if (this.props.data.loading) {
           return (
             <View style={styles.loadingWrapper}>

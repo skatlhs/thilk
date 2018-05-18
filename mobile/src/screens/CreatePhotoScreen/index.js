@@ -1,0 +1,135 @@
+import React, { PureComponent } from 'react';
+import { StyleSheet, View, CameraRoll, Image,  FlatList, ActivityIndicator, TouchableOpacity, Dimensions,} from 'react-native';
+const MAX_PHOTOS = 20;
+const PADDING = 0;
+const MARGIN = 0;
+
+const { width } = Dimensions.get('window');
+const COLORS_GRADIENTS = ['#ff3d78', '#ff7537'];
+
+const styles = StyleSheet.create({
+  imageWrapper: {
+    width: (width - PADDING * 2 - MARGIN * 2) / 3,
+    height: (width - PADDING * 2 - MARGIN * 2) / 3,
+    borderRadius: 3,
+    marginVertical: '.0%',
+    marginHorizontal: MARGIN,
+    left: 0
+  },
+  image: {
+    flex: 1,
+    borderRadius: 0,
+  },
+  loadingWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageHover: {
+    position: 'absolute',
+    height: '100%',
+    flex: 3,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    borderWidth: 3,
+    borderColor: '#ff3d78'
+  },
+
+});
+
+class CreatePhotoScreen extends PureComponent {
+  state = {
+    images: [],
+    loading: false,
+    selected: null,
+    hasNextPage: false,
+    endCursor: '',
+    firstQuery: true,
+  };
+
+  componentDidMount() {
+    this._getPhotos();
+  }
+
+  _getPhotos = async after => {
+    if (this.state.firstQuery) {
+      this.setState({ loading: true });
+    }
+
+    const res = await CameraRoll.getPhotos({
+      first: MAX_PHOTOS,
+      after,
+    });
+
+    this.setState({
+      images: [...this.state.images, ...res.edges],
+      loading: false,
+      hasNextPage: res.page_info.has_next_page,
+      endCursor: res.page_info.end_cursor,
+      firstQuery: false,
+    });
+
+    console.log('====================================');
+    console.log('res', res);
+    console.log('====================================');
+  };
+
+  _renderItem = ({ item }) => {
+    const isSelected =
+      this.state.selected &&
+      this.state.selected.node.image.filename === item.node.image.filename;
+    return (
+      <TouchableOpacity
+        disabled={isSelected} 
+        onPress={() => this._onSelect(item)}
+        style={styles.imageWrapper}
+      >
+        
+        <Image source={{ uri: item.node.image.uri }} style={styles.image} />
+        {isSelected && <View style={styles.imageHover} />}
+         
+      </TouchableOpacity>
+    );
+  };
+
+  _onSelect = selected => {
+    this.setState({ selected });
+  };
+
+  _keyExtractor = item => item.node.image.filename;
+
+  _onEndReached = () => {
+    if (this.state.hasNextPage) {
+      this._getPhotos(this.state.endCursor);
+    }
+  };
+
+  render() {
+    console.log('====================================');
+    console.log('state', this.state);
+    console.log('====================================');
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingWrapper}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    return (
+      <FlatList
+        data={this.state.images}
+        renderItem={this._renderItem}
+        numColumns={3}
+        keyExtractor={this._keyExtractor}
+        extraData={this.state}
+        onEndReached={this._onEndReached}
+      />
+    );
+  }
+}
+
+export default CreatePhotoScreen;

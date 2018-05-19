@@ -4,6 +4,8 @@ import FeedsScreen from './FeedsScreen';
 import ExploreScreen from './ExploreScreen';
 import LoginScreen from './LoginScreen';
 import CreatePhotoScreen from './CreatePhotoScreen';
+import CaptionScreen from './CaptionScreen';
+
 import WithProvider from '../components/WithProvider';
 
 export const registerScreens = () => {
@@ -21,4 +23,9 @@ export const registerScreens = () => {
   Navigation.registerComponent('thilk.CreatePhotoScreen', () =>
     WithProvider(CreatePhotoScreen),
   );
+    
+  Navigation.registerComponent('thilk.CaptionScreen', () =>
+    WithProvider(CaptionScreen),
+  );
+    
 };

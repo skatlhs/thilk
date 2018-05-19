@@ -31,7 +31,7 @@ class FeedsScreen extends Component {
                 id: 'camera',
                  icon: iconsMap.camera
               },
-          ]
+          ],
       })
   }
 

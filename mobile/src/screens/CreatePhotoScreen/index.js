@@ -70,7 +70,7 @@ class CreatePhotoScreen extends PureComponent {
       if (e.id === 'goToCaption') {
         this.props.navigator.push({
           screen: 'thilk.CaptionScreen',
-          title: 'Create a new post',
+          title: '',
           passProps: {
             image: this.state.selected,
           },

@@ -9,6 +9,7 @@ defmodule Thlk.Posts.Photo do
 
     belongs_to :user, Thlk.Accounts.User
     has_many :likes, Thlk.Reactions.LikePhoto
+    has_many :comments, Instagram.Posts.Comment
 
     timestamps()
   end

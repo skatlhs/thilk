@@ -1,20 +1,18 @@
 defmodule ThlkWeb.Schema do
   use Absinthe.Schema
-
   alias ThlkWeb.Resolvers
   alias ThlkWeb.Schema.Middleware
-
   import_types __MODULE__.PostsTypes
   import_types __MODULE__.AccountsTypes
 
   query do
-    @desc "Get list of photo"
+    @desc "Gets a list of photoso"
     field :photos, list_of(:photo) do
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.photos/3
     end
 
-    @desc "Get a single photo from his id"
+    @desc "single photo from id"
     field :photo, :photo do
       arg :id, non_null(:id)
       resolve &Resolvers.Posts.photo/3
@@ -24,6 +22,13 @@ defmodule ThlkWeb.Schema do
     field :presign_url, :presign_url do
       middleware Middleware.Authorize
       resolve &Resolvers.Posts.presign_url/3
+    end
+
+    @desc "comments for a photo"
+    field :comments, non_null(list_of(:comment)) do
+      arg :photo_id, non_null(:id)
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.get_comments/3
     end
   end
 
@@ -48,6 +53,14 @@ defmodule ThlkWeb.Schema do
       arg :photo_id, non_null(:id)
       middleware Middleware.Authorize
       resolve &Resolvers.Reactions.like_photo/3
+    end
+
+    @desc "Create a comment for a photo"
+    field :create_comment, :comment do
+      arg :photo_id, non_null(:id)
+      arg :text, non_null(:string)
+      middleware Middleware.Authorize
+      resolve &Resolvers.Posts.create_comment/3
     end
   end
 end

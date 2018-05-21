@@ -16,11 +16,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffffff',
      //   flexDirection: 'row',
-        paddingHorizontal: 16
+     //   paddingHorizontal: 16
     },
     
     userMetaWrapper: {
         flex: 1,
+        borderWidth: 1,
+        borderTopColor: '#e0e0e0',
+        borderColor: 'transparent',
      //   flexDirection: 'row'
     },
     
@@ -46,6 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex:1,
         alignItems: 'center',
+
      //   paddingLeft: 10
     },
     
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
     },
     
     userData: {
-        flexDirection: 'row',  display: 'none'
+        flexDirection: 'row', // display: 'none'
     },
     
     userDataStats: {

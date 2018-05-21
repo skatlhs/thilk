@@ -1,6 +1,8 @@
 defmodule ThlkWeb.Schema.PostsTypes do
   use Absinthe.Schema.Notation
+  use Absinthe.Ecto, repo: Thlk.Repo
 
+  import Ecto.Query
   alias ThlkWeb.Resolvers
 
   object :photo do
@@ -18,5 +20,13 @@ defmodule ThlkWeb.Schema.PostsTypes do
   object :presign_url do
     field :url, non_null(:string)
     field :upload_url, non_null(:string)
+  end
+
+  object :comment do
+    field :id, non_null(:id)
+    field :text, non_null(:string)
+    field :user, non_null(:user), resolve: assoc(:user)
+    field :inserted_at, non_null(:string)
+    field :updated_at, non_null(:string)
   end
 end

@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native';
 import { Divider } from '../../components';
 import gql from 'graphql-tag';
-import { withApollo } from 'react-apollo';
+import { withApollo, graphql } from 'react-apollo';
 import LinearGradient from 'react-native-linear-gradient';
 import { uploadImageToS3 } from '../../utils/uploadImage';
+import { createPhotoMutation } from '../../graphql/mutations';
+import { FeedsPhotoFragment } from '../../screens/FeedsScreen/fragments';
 
 const COLORS_GRADIENTS = ['#ff3d78', '#ff7537'];
 
@@ -29,7 +31,12 @@ const styles = StyleSheet.create({
     
     imageWrapper: {
         flex: 1,
-
+    },
+    
+    loadingWrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     
     img: {
@@ -73,6 +80,7 @@ class CaptionScreen extends PureComponent {
     super(props);
     this.state = {
       caption: '',
+      loading: false,
     };
       
     props.navigator.setOnNavigatorEvent(this._onNavigatorEvent.bind(this));
@@ -100,20 +108,37 @@ class CaptionScreen extends PureComponent {
       }
     
   _onSharePostPress = async () => {
+      this.setState({ loading: true });
       const res = await this.props.client.query({ query: signS3Query });
         const resultFromS3 = await uploadImageToS3(
             this.props.image.node.image.uri,
             res.data.presignUrl,
         );
 
-    console.log('====================================');
-    console.log('resultFromS3', resultFromS3);
-    console.log('====================================');
-  }
+      
+      
+   await this.props.onCreatePhoto({
+      imageUrl: resultFromS3.remoteUrl,
+      caption: this.state.caption,
+    });
+
+    this.setState({ loading: false });
+    this.props.navigator.dismissModal({
+      animationType: 'slide-down',
+    });
+
+  };
   
   _onCaptionChange = caption => this.setState({ caption });
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.loadingWrapper}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
     return ( 
         <TouchableWithoutFeedback
         onPress={Keyboard.dismiss}
@@ -144,4 +169,28 @@ class CaptionScreen extends PureComponent {
   }
 }
 
-export default withApollo(CaptionScreen);
+const getPhotos = gql`
+  query {
+    photos {
+      ...feedsPhoto
+    }
+  }
+  ${FeedsPhotoFragment}`;
+
+export default graphql(createPhotoMutation, {
+  props: ({ mutate }) => ({
+    onCreatePhoto: variables =>
+      mutate({
+        variables,
+        update: (store, { data: { createPhoto } }) => {
+          const query = store.readQuery({ query: getPhotos });
+          store.writeData({
+            query: getPhotos,
+            data: {
+              photos: [createPhoto, ...query.photos],
+            },
+          });
+        },
+      }),
+  }),
+})(withApollo(CaptionScreen));

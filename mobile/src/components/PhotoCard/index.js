@@ -47,6 +47,18 @@ class PhotoCard extends Component {
   _onLikedPress = () => {
       this.props.onLikePhotoMutation()
   };
+
+
+  _goToComment = () => {
+    this.props.navigator.push({
+      screen: 'thilk.CommentsScreen',
+      title: 'Comments',
+      passProps: {
+        photoId: this.props.id,
+      },
+    });
+  };
+
     render() {
         return (
             <View style={styles.root}>
@@ -55,7 +67,7 @@ class PhotoCard extends Component {
             <ActionButtons viewerLike={this.props.data.viewerLike} onLikedPress={this._onLikedPress} />
             <Meta caption={this.props.data.caption}/>
               <View style={styles.commentsWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this._goToComment}>
                     <Text style={styles.commentViewAll}>View all 15 comments</Text>
                 </TouchableOpacity>
               </View>

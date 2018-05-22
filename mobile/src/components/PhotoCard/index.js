@@ -59,7 +59,7 @@ class PhotoCard extends Component {
                     <Text style={styles.commentViewAll}>View all 15 comments</Text>
                 </TouchableOpacity>
               </View>
-            <CommentInput />
+                <CommentInput photoId={this.props.data.id} navigator={this.props.navigator} />
                  <View style={styles.timeAgoWrapper}>
                     <Text style={styles.timeAgo}>6 HOURS AGO</Text>
                 </View>    

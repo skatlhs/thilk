@@ -50,6 +50,16 @@ const styles = StyleSheet.create ({
 
 class CommentInput extends Component {
     state = { }
+    _goToComments = () => {
+      this.props.navigator.push({
+        screen: 'thilk.CommentsScreen',
+        title: 'Comments',
+        passProps: {
+          photoId: this.props.photoId,
+        },
+      });
+    };
+
     render() {
         return(
             <View style={styles.root}>
@@ -57,7 +67,7 @@ class CommentInput extends Component {
                    <Image source={{ uri: fakeAvatar }} style={styles.avatar} />
                 </View>
                 
-                <TouchableOpacity style={styles.inputWrapper}>
+                <TouchableOpacity onPress={this._goToComments} style={styles.inputWrapper}>
                     <View style={styles.input}>
                         <Text style={styles.inputText}>Add a comment</Text>
                     </View>

@@ -54,8 +54,11 @@ class PhotoCard extends Component {
       screen: 'thilk.CommentsScreen',
       title: 'Comments',
       passProps: {
-        photoId: this.props.id,
+        photoId: this.props.data.id,
       },
+      navigatorStyle: {
+         tabBarHidden: true,
+        },
     });
   };
 
@@ -67,7 +70,7 @@ class PhotoCard extends Component {
             <ActionButtons viewerLike={this.props.data.viewerLike} onLikedPress={this._onLikedPress} />
             <Meta caption={this.props.data.caption}/>
               <View style={styles.commentsWrapper}>
-                <TouchableOpacity onPress={this._goToComment}>
+                <TouchableOpacity onPress={this._goToComment} >
                     <Text style={styles.commentViewAll}>View all 15 comments</Text>
                 </TouchableOpacity>
               </View>

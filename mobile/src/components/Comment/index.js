@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
         
     commentText: {
         color: '#959595',
-        paddingLeft: 10
+        paddingLeft: 10,
+        fontWeight: '100'
     },
         
     lineText: {
